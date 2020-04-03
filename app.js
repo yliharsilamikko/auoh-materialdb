@@ -1,5 +1,7 @@
 const express = require('express');
 const port = process.env.PORT || 8080;
+const mongoose = require('mongoose');
+
 const app = express();
 
 const body_parser = require('body-parser');
@@ -8,6 +10,7 @@ const material_controller = require('./material_controller');
 
 // npm init
 // npm install express
+// npm install mongoose
 // npm install nodemon --save-dev
 // npm run start-dev
 
@@ -35,4 +38,16 @@ app.get("/api/materials", material_controller.api_get_materials);
 
 // DELETE
 
-app.listen(port);
+const database_uri = "mongodb+srv://server:6P1nPAsahRSZORPy@cluster0-i0gtd.mongodb.net/test?retryWrites=true&w=majority";
+
+mongoose.connect(database_uri, {
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useFindAndModify: false
+}).then(() => {
+    console.log('database connected');
+    app.listen(port);
+}).catch(err => {
+    console.log(err);
+});
