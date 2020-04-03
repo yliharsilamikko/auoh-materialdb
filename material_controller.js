@@ -47,7 +47,30 @@ const api_get_materials = (req, res, next) => {
 
 // DELETE
 
+// DELETE /api/material/5e877016c4bd517bd8ef178a
+const api_delete_material = (req, res, next) => {
+    let id = req.params.id;
+    material_model.findOneAndDelete({
+        name: id
+    }).then(() => {
+        res.send();
+    }).catch(err => {
+        res.status(500);
+        res.send(err.errmsg);
+        console.log(err);
+    });
+
+    // material_model.findByIdAndRemove(id).then(() => {
+    //     res.send();
+    // }).catch(err => {
+    //     res.status(500);
+    //     res.send(err.errmsg);
+    //     console.log(err);
+    // });
+};
+
 
 // EXPORTS
 module.exports.api_post_material = api_post_material;
 module.exports.api_get_materials = api_get_materials;
+module.exports.api_delete_material = api_delete_material;
