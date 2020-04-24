@@ -23,7 +23,8 @@ $(document).ready(() => {
         rowId: "_id",
         columns: [{
                 data: "_id",
-                type: "readonly"
+                type: "readonly",
+                visible: false
             },
             {
                 data: "name",
