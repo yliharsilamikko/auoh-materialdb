@@ -60,7 +60,9 @@ const api_put_material = (req, res, next) => {
     let id = req.params.id;
     let data = material_data(req);
 
-    material_model.findByIdAndUpdate(id, data).then((material) => {
+    material_model.findByIdAndUpdate(id, data, {
+        new: true
+    }).then((material) => {
         res.send(material);
     }).catch(err => {
         res.status(500);
